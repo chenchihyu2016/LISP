@@ -1,7 +1,7 @@
 (defparameter value 1)
 (defparameter *ALines* 0)
 (defparameter *BLines* 0)
-( let ((in (open "/home/chenchihyu/LISP/file1.txt" )))
+( let ((in (open "file1.txt" )))
   (when in
     (loop for line = (read-line in nil)
       while line do (setf *Alines* (+ *Alines* 1))
@@ -9,7 +9,7 @@
   )
   (close in)
 )
-( let ((star (open "/home/chenchihyu/LISP/file2.txt" )))
+( let ((star (open "file2.txt" )))
   (when star
     (loop for line = (read-line star nil)
       while line do (setf *Blines* (+ *Blines* 1))
@@ -21,7 +21,7 @@
 (defun print_secA (start end)
   (setf start (+ start 1))
   (setf end (- end 1))
-  ( let ((in (open "/home/chenchihyu/LISP/file1.txt" )))
+  ( let ((in (open "file1.txt" )))
     (when in
       (
         loop for line = (read-line in nil)
@@ -30,7 +30,7 @@
             (setf value (+ value 1))
             (if (<= value end)
               ( progn
-                (format t "-~a~%" line)
+                (format t "~c[32m~a~c[0m~%" #\ESC line #\ESC)
                 (setf value (+ value 1))
               )
             )
@@ -43,7 +43,7 @@
 )
 
 (defun print_same (end)
-  ( let ((in (open "/home/chenchihyu/LISP/file1.txt" )))
+  ( let ((in (open "file1.txt" )))
     (when in
       (
         loop for line = (read-line in nil)
@@ -66,7 +66,7 @@
 (defun print_secB (start end)
   (setf start (+ start 1))
   (setf end (- end 1))
-  ( let ((in (open "/home/chenchihyu/LISP/file2.txt" )))
+  ( let ((in (open "file2.txt" )))
     (when in
       (
         loop for line = (read-line in nil)
@@ -75,7 +75,7 @@
             (setf value (+ value 1))
             (if (<= value end)
               ( progn
-                (format t "+~a~%" line)
+                (format t "~c[36m~a~c[0m~%" #\ESC line #\ESC)
                 (setf value (+ value 1))
               )
             )
@@ -92,17 +92,14 @@
 (defparameter overlookA 1)
 (defparameter recordA 0)
 (defparameter tempA 1)
-(defparameter blahA 0)
-( let ((in (open "/home/chenchihyu/LISP/file1.txt" )))
+( let ((in (open "file1.txt" )))
   (when in
     (loop for lineOne = (read-line in nil)
       while lineOne do
         (setf currentA (+ currentA 1))
         (setf tempA 1)
-        (setf blahA overlookA)
-        (setf blahA (- blahA 1))
-        (setf recordA blahA)
-        (let ((star (open "/home/chenchihyu/LISP/file2.txt" )))
+        (setf recordA (- overlookA 1))
+        (let ((star (open "file2.txt" )))
           (when star
             (loop for lineTwo = (read-line star nil)
               while lineTwo do
@@ -115,7 +112,6 @@
                       (setf overlookA recordA)
                     )
                     (setf recordA (+ recordA 1))
-
                   )
                 )
             )
@@ -133,17 +129,14 @@
 (defparameter overlookB 1)
 (defparameter recordB 0)
 (defparameter tempB 1)
-(defparameter blahB 0)
-( let ((in (open "/home/chenchihyu/LISP/file2.txt" )))
+( let ((in (open "file2.txt" )))
   (when in
     (loop for lineOne = (read-line in nil)
       while lineOne do
         (setf currentB (+ currentB 1))
         (setf tempB 1)
-        (setf blahB overlookB)
-        (setf blahB (- blahB 1))
-        (setf recordB blahB)
-        (let ((star (open "/home/chenchihyu/LISP/file1.txt" )))
+        (setf recordB (- overlookB 1))
+        (let ((star (open "file1.txt" )))
           (when star
             (loop for lineTwo = (read-line star nil)
               while lineTwo do
@@ -156,7 +149,6 @@
                       (setf overlookB recordB)
                     )
                     (setf recordB (+ recordB 1))
-
                   )
                 )
             )
@@ -167,11 +159,6 @@
     (close in)
   )
 )
-
-
-;(if (= (car (car llstA)) *ALines*)()(push *Alines* (car llstA)))
-;(if (= (car (car llstB)) *BLines*)()(push *Blines* (car llstB)))
-
 
 (defparameter Alist (reverse(car llstA)))
 (defparameter Blist (reverse(car llstB)))
@@ -185,7 +172,7 @@
 (defparameter Bend 0)
 (defparameter Bbreak 0)
 (defparameter temper -1)
-( let ((in (open "/home/chenchihyu/LISP/file1.txt" ))(star (open "/home/chenchihyu/LISP/file2.txt")))
+( let ((in (open "file1.txt" ))(star (open "file2.txt")))
   (dolist (x Alist)
     (if (< x *ALines*)
       (progn
